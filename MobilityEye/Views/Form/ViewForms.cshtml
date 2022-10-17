@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Form>
+
+
+@{
+    ViewData["Title"] = "Forms List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Forms List</h1>
+<br/>
+@Html.ActionLink("Add New Form","Create","Form",null,new{@class = "btn btn-primary"})
+<br/>
+<br/>
+
+@{
+    if (!Model.Any())
+    {
+        <p>You dont have any forms yet.</p>
+    }
+    else
+    {
+        <table class="table table-bordered border-1">
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Title</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var f in Model)
+            {
+                <tr>
+                    <td>@f.Id</td>
+                    <td>@f.Title</td>
+                    <td>@Html.ActionLink("Fill","Fill","Form",new {Id = f.Id},new{@class = "btn btn-secondary"})</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+}

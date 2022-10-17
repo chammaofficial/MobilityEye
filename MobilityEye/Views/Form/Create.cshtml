@@ -1,0 +1,31 @@
+﻿@model MobilityEye.ViewModels.CreateFormViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<h1>Create New From</h1>
+<br/>
+<br/>
+
+@using (Html.BeginForm("Create","Form",null,FormMethod.Post,true,null))
+{
+    <div>
+        <div>
+            @Html.ValidationMessageFor(m=>m.Title)
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+        <br/>
+        <div>
+            @Html.ValidationMessageFor(m=>m.JsonFormContent)
+            @Html.LabelFor(m => m.JsonFormContent, "Form in JSON Format")
+            @Html.TextAreaFor(m => m.JsonFormContent, new { @class = "form-control" })
+        </div>
+        <div>
+            @Html.HiddenFor(m=>m.Id)
+        </div>
+        <br/>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+}

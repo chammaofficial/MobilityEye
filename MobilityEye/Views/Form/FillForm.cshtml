@@ -1,0 +1,59 @@
+﻿@model Form
+@{
+    ViewData["Title"] = "FillForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<h1>@Model.Title</h1>
+<br/>
+<br/>
+
+@using (Html.BeginForm("FillForm", "Form", null, FormMethod.Post, true, null))
+{
+    <div>
+        
+        @foreach (var ctrl in Model.FormControls)
+        {
+            if(@ctrl.Type == "text")
+            {
+                <div>
+                    <label for="@ctrl.Lable"> @ctrl.Lable</label><br>
+                    <input type="text" name="@ctrl.Lable" id="@ctrl.Lable" required="true" class="form-control"/>
+                </div>
+                <br />
+            }
+
+            if (@ctrl.Type == "checkbox")
+            {
+                <div>
+                    <label for="@ctrl.Lable"> @ctrl.Lable</label><br>
+                    @foreach (var option in ctrl.FormControlOptions)
+                    {
+                        <input type="checkbox" id="@option.OptionLabel" name="@option.OptionLabel" value="@option.OptionLabel"/>
+                        <label for="@option.OptionLabel"> @option.OptionLabel</label>
+                        <br>
+                    }
+                    
+
+                </div>
+                <br />
+            }
+
+            if (@ctrl.Type == "radio")
+            {
+                <div>
+                    <p>@ctrl.Lable</p>
+                    @foreach (var option in ctrl.FormControlOptions)
+                    {
+                        <input type="radio" id="@option.OptionLabel" name="@ctrl.Lable" value="@option.OptionLabel"/>
+                        <label for="@option.OptionLabel">@option.OptionLabel</label>
+                        <br>
+                    }
+                </div>
+                <br />
+            }
+        }
+        <br/>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </div>
+}
